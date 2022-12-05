@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>글 작성</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+  <div class="container mt-5">
+    <form action="/board/save" method="post" name="saveFn">
+      <input type="text" name="boardWriter" class="form-control" placeholder="작성자">
+      <input type="text" name="boardPass" class="form-control" placeholder="비밀번호">
+      <input type="text" name="boardTitle" class="form-control" placeholder="제목">
+      <input type="text" name="boardContents" class="form-control" placeholder="내용">
+      <input type="button" class=" btn btn-secondary" th:onclick="save()" value="상세조회">
+    </form>
+  </div>
+</body>
+<script>
+  const save = () => {
+    document.saveFn.submit();
+  }
+</script>
+</html>
