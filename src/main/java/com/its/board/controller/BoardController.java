@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/board")
-public class BoradController {
+public class BoardController {
  private final BoardService boardService;
 
  @GetMapping("/save")

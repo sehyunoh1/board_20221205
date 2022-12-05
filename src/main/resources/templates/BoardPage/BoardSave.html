@@ -5,16 +5,22 @@
     <title>글 작성</title>
   <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+  <style>
+    #write-form{
+      width: 800px;
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container mt-5">
+<th:block th:replace="commonPage/header" :: header></th:block>
+  <div class="container mt-5" id="write-form">
     <form action="/board/save" method="post" name="saveFn">
       <input type="text" name="boardWriter" class="form-control" placeholder="작성자">
       <input type="text" name="boardPass" class="form-control" placeholder="비밀번호">
       <input type="text" name="boardTitle" class="form-control" placeholder="제목">
-      <input type="text" name="boardContents" class="form-control" placeholder="내용">
-      <input type="button" class=" btn btn-secondary" th:onclick="save()" value="상세조회">
+      <textarea name="boardContents" cols="30" rows="10" class="form-control" placeholder="내용"></textarea>
+      <input type="button" class=" btn btn-secondary" th:onclick="save()" value="글 작성">
     </form>
   </div>
 </body>

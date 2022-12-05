@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "board_table")
-public class BoardEntity {
+public class BoardEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +26,7 @@ public class BoardEntity {
     @Column
     private int boardHits;
 
+
     public static BoardEntity toSaveEntity(BoardDTO boardDTO){
     BoardEntity boardEntity = new BoardEntity();
     boardEntity.setId(boardDTO.getId());
@@ -32,7 +34,7 @@ public class BoardEntity {
     boardEntity.setBoardWriter(boardDTO.getBoardWriter());
     boardEntity.setBoardContents(boardDTO.getBoardContents());
     boardEntity.setBoardPass(boardDTO.getBoardPass());
-    boardEntity.setBoardHits(boardDTO.getBoardHits());
+    boardEntity.setBoardHits(0);
     return boardEntity;
     }
 
