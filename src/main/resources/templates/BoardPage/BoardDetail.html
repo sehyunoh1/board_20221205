@@ -11,6 +11,7 @@
     </style>
 </head>
 <body>
+<th:block th:replace="commonPage/header" :: header></th:block>
   <div class="container mt-5">
     <table class="table table-hover">
       <tr>
@@ -35,6 +36,7 @@
         </tr>
     </table>
       <button class="btn btn-danger" th:onclick="deleteFn([[${board.id}]])">글 삭제</button>
+      <button class="btn btn-primary" th:onclick="updateFn([[${board.id}]])">글 수정</button>
   </div>
 
     <div class="container mt-5" id="PasswordCk">
@@ -48,12 +50,26 @@
           passCk += "<input type='button' class='btn btn-danger mt-3' value='삭제' onclick='deleteG([[${board.id}]])'>"
       document.getElementById("PasswordCk").innerHTML = passCk
 
-
   }
   const deleteG = (deleteId) => {
       if(document.getElementById("passCk").value == [[${board.boardPass}]]){
           alert("삭제가 완료되었습니다.")
           location.href="/board/delete/"+deleteId;
+      }else{
+          alert("비밀번호를 확인해주세요")
+      }
+  }
+  const updateFn = (updateId) => {
+      console.log([[${board.boardPass}]]);
+      let passCk = "<input type='text' class='form-control' placeholder='비밀번호를 입력하세요.' id='passCk' name='id'>"
+      passCk += "<input type='button' class='btn btn-primary mt-3' value='다음' onclick='updateG([[${board.id}]])'>"
+      document.getElementById("PasswordCk").innerHTML = passCk
+
+  }
+  const updateG = (updateId) => {
+      if(document.getElementById("passCk").value == [[${board.boardPass}]]){
+          alert("수정페이지로 이동합니다.")
+          location.href="/board/update/"+updateId;
       }else{
           alert("비밀번호를 확인해주세요")
       }

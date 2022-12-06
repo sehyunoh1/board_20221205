@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>수정</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<th:block th:replace="commonPage/header" :: header></th:block>
+<div class="container mt-5" id="write-form">
+  <form action="/board/update" method="post" name="updateF">
+    <input type="text" name="id" th:value="${board.id}" class="form-control" readonly>
+      <input type="hidden" name="boardPass" th:value="${board.boardPass}">
+    <input type="text" name="boardWriter" class="form-control" placeholder="작성자" th:value = "${board.boardWriter}" readonly>
+    <input type="text" name="boardTitle" class="form-control" placeholder="제목" th:value = "${board.boardTitle}">
+    <textarea name="boardContents" cols="30" rows="10" class="form-control" placeholder="내용" ></textarea>
+      <input type="hidden" name="boardHits" th:value="${board.boardHits}">
+    <input type="button" class=" btn btn-secondary" th:onclick="updateFn()" value="수정">
+  </form>
+</div>
+</body>
+<script>
+  const updateFn = () => {
+      document.updateF.submit();
+  }
+</script>
+</html>

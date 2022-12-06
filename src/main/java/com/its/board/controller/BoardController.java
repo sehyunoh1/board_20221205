@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -41,4 +42,16 @@ public class BoardController {
         boardService.delete(id);
         return "redirect:/board/";
  }
+ @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable Long id, Model model){
+       BoardDTO boardDTO= boardService.findById(id);
+        model.addAttribute("board",boardDTO);
+        return "/BoardPage/BoardUpdate";
+ }
+@PostMapping("/update")
+    public String update(@ModelAttribute BoardDTO boardDTO){
+     boardDTO.setBoardUpdatedTime(LocalDateTime.now());
+     boardService.update(boardDTO);
+        return "redirect:/board/"+boardDTO.getId();
+}
 }
