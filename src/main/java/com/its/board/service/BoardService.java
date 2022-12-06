@@ -6,6 +6,7 @@ import com.its.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,5 +41,9 @@ public class BoardService {
       }else {
             return null;
       }
+    }
+    @Transactional
+    public int updateHits(Long id){
+        return boardRepository.updateHits(id);
     }
 }
