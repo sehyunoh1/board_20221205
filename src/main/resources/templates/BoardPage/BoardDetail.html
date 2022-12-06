@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>상세 페이지</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <style>
+        #PasswordCk {
+            width: 500px;
+        }
+    </style>
 </head>
 <body>
   <div class="container mt-5">
@@ -29,14 +34,29 @@
             <td th:text="${board.boardHits}"></td>
         </tr>
     </table>
-      <button class="btn btn-danger" th:onclick="deleteFn()">글 삭제</button>
+      <button class="btn btn-danger" th:onclick="deleteFn([[${board.id}]])">글 삭제</button>
   </div>
+
+    <div class="container mt-5" id="PasswordCk">
+
+    </div>
 </body>
 <script>
-  const deleteFn = () => {
+  const deleteFn = (deleteId) => {
+      console.log([[${board.boardPass}]]);
+      let passCk = "<input type='text' class='form-control' placeholder='비밀번호를 입력하세요.' id='passCk' name='id'>"
+          passCk += "<input type='button' class='btn btn-danger mt-3' value='삭제' onclick='deleteG([[${board.id}]])'>"
+      document.getElementById("PasswordCk").innerHTML = passCk
 
 
-
+  }
+  const deleteG = (deleteId) => {
+      if(document.getElementById("passCk").value == [[${board.boardPass}]]){
+          alert("삭제가 완료되었습니다.")
+          location.href="/board/delete/"+deleteId;
+      }else{
+          alert("비밀번호를 확인해주세요")
+      }
   }
 </script>
 </html>

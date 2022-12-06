@@ -46,4 +46,8 @@ public class BoardService {
     public int updateHits(Long id){
         return boardRepository.updateHits(id);
     }
+
+    public void delete(Long id) {
+        boardRepository.deleteById(id);
+    }
 }
