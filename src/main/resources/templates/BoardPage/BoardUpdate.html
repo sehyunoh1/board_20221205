@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>수정</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/axios.min.js}"></script>
 </head>
 <body>
 <th:block th:replace="commonPage/header" :: header></th:block>
@@ -16,12 +17,44 @@
     <textarea name="boardContents" cols="30" rows="10" class="form-control" placeholder="내용" ></textarea>
       <input type="hidden" name="boardHits" th:value="${board.boardHits}">
     <input type="button" class=" btn btn-secondary" th:onclick="updateFn()" value="수정">
+      <input type="button" value="수정(axios)" onclick="boardUpdateAxios()" class="btn btn-primary">
   </form>
 </div>
 </body>
-<script>
+<script th:inline = "javascript">
   const updateFn = () => {
       document.updateF.submit();
+  }
+  const boardUpdateAxios = () => {
+      const id = document.querySelector('input[name="id"]').value;
+      const title = document.getElementsByName("boardTitle")[0].value;
+      const writer = document.querySelector('input[name="boardWriter"]').value;
+      const pass = document.querySelector('input[name="boardPass"]').value;
+      const contents = document.querySelector('input[name="boardContents"]').value;
+      const hits = document.querySelector('input[name="boardHits"]').value;
+      const passDB = [[${board.boardPass}]];
+      if (pass == passDB) {
+          axios({
+              method: "put",
+              url: "/board/" + id,
+              data: {
+                  id: id,
+                  boardTitle: title,
+                  boardWriter: writer,
+                  boardPass: pass,
+                  boardContents: contents,
+                  boardHits: hits
+              }
+          }).then(res => {
+              console.log("수정 성공");
+              location.href = "/board/" + id;
+          }).catch(err => {
+              alert("수정 실패");
+          })
+      } else {
+          alert("비밀번호가 일치하지 않습니다.");
+      }
+
   }
 </script>
 </html>
